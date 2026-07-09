@@ -102,6 +102,49 @@ The additional behavioral experiment was conducted later and includes data from 
 
 For some participants, there is **no separate `*_addition.mat` file**. In those cases, this indicates that the participant completed the full experimental protocol (main experiment plus additional behavioral experiment), and the relevant follow-up data were retained within the corresponding `*_adaptation condition.mat` file rather than saved as a separate addition file.
 
+* `data/params/`
+  Anonymized processed neuroimaging-derived parameter files for individual participants.
+
+These files are **not raw MRI data**. They do not contain raw functional images, anatomical images, DICOM files, or NIfTI volumes. Instead, each file contains ROI-based model parameters extracted after neuroimaging preprocessing, model fitting, and ROI selection.
+
+Within the `data/params/` folder, the file types have the following meanings:
+
+* `*_merged_data.mat`
+  Processed ROI-level parameter file for one anonymized participant.
+
+  Each file contains extracted voxel-level parameters from the predefined numerosity maps/ROIs. The main variables include:
+
+  * `pref`
+    Preferred numerosity estimates for each ROI and condition.
+
+  * `ve`
+    Variance explained values for each ROI and condition.
+
+  * `width`
+    Tuning width estimates for each ROI and condition.
+
+  These files are used for the main neuroimaging analyses, including ROI-wise parameter extraction, adaptation-effect estimation, mixed-effects modeling, bootstrap analyses, and figure/table generation.
+
+The ROI labels used in these files include:
+
+* `NF`
+* `NPC1`
+* `NPC2`
+* `NPC3`
+* `NPO`
+* `NTO`
+
+The condition labels generally indicate:
+
+* `control`
+  The control/mapping condition used as the baseline estimate of preferred numerosity.
+
+* `con`
+  The connected-dot adaptation condition.
+
+* `uncon`
+  The unconnected-dot adaptation condition.
+
 ## Data Availability
 
 This repository includes:
