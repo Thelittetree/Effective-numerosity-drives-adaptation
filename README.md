@@ -71,22 +71,22 @@ code/
 * `data/behavioral data/`
   Behavioral data for the main and additional experiments.
 
-Within the behavioral data folder, the file types have the following meanings:
+  Within the behavioral data folder, the file types have the following meanings:
 
-* `*_no adpatation.mat`
-  Behavioral data from the **no adaptation** condition.
-
-* `*_adaptation condition.mat`
-  Behavioral data collected under the different **adaptation conditions**.
-
-* `*_PSE of 40 connected.mat`
-  Data used to estimate the participant’s **subjective perceived numerosity** for the display containing **40 connected dots**.
-
-* `*_addition.mat`
-  Data from the **additional behavioral experiment**, collected in a later follow-up session.
-
-* `additional behavioral experiment data/`
-  Folder containing organized data related to the additional behavioral experiment.
+    * `*_no adpatation.mat`
+      Behavioral data from the **no adaptation** condition.
+    
+    * `*_adaptation condition.mat`
+      Behavioral data collected under the different **adaptation conditions**.
+    
+    * `*_PSE of 40 connected.mat`
+      Data used to estimate the participant’s **subjective perceived numerosity** for the display containing **40 connected dots**.
+    
+    * `*_addition.mat`
+      Data from the **additional behavioral experiment**, collected in a later follow-up session.
+    
+    * `additional behavioral experiment data/`
+      Folder containing organized data related to the additional behavioral experiment.
 
 * `data/fMRI data/`
   Anonymized processed neuroimaging-derived parameter files for individual participants.
