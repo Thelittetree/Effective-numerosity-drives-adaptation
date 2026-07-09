@@ -1,15 +1,61 @@
 %% Multi-subject data aggregation and adaptation-effect analysis
-% this script include
-% Figure 2A: Change in natural logarithmic preferred numerosity as a function
-% Figure 3A+B: Comparison of distance-dependent numerosity adaptation
-% Figure S3A+B: Linear-scale benchmarking of distance-dependent modulation
-% Table S2: Voxel-pooled bootstrap test of the condition-difference index (Diff) for distance-dependent adaptation slopes
-% Table S3: Robustness of voxel-pooled bootstrap estimates
-%  
+% This script includes:
+% 1. Multi-subject loading and voxel-level aggregation of *_merged_data.mat files.
+% 2. Linear-scale adaptation-effect analysis for connected and unconnected conditions,
+%    including binned means, SEM, and linear-slope extraction.
+% 3. Figure 5A: linear-space three-condition fit visualization
+%    (unconnected, connected, and high-numerosity conditions).
+% 4. Figure 4A: log-space distance-dependent adaptation analysis
+%    with x = log(PN_control) - log(40).
+% 5. Table S2: voxel-pooled bootstrap test of the condition-difference index,
+%    defined as slope_connected - slope_unconnected.
+% 6. Table S5: robustness/sensitivity check across bootstrap sizes and random seeds.
+% 7. Figure 4C: bootstrap-fit visualization and ROI-wise bootstrap violin plot.
+% 8. Figure 5B: ROI-level three-condition comparison of linear slopes.
+%
 clear; clc; close all;
 
-%% Data directory
-data_dir = 'D:\lrs\all-in-one analysis\params';
+%% Project paths and data directories
+% Expected folder structure for public release:
+%
+% project_root/
+% |-- this_script.m
+% |-- data/
+% |   |-- params/
+% |   |   |-- *_merged_data.mat
+% |-- results/
+%
+% If this script is saved as a .m file, project_root is the folder containing
+% this script. If the code is pasted into the MATLAB command window,
+% project_root is set to the current working directory.
+
+script_dir = fileparts(mfilename('fullpath'));
+if isempty(script_dir)
+    script_dir = pwd;
+end
+
+project_root = script_dir;
+
+data_dir = fullfile(project_root, 'data', 'params');
+
+% CSV files for the high-numerosity reference condition (Tsouli et al., 2021).
+% Preferred public-release folder name: data/high_adaptation_linear/.
+% The alternative folder name data/high adaptation linear/ is also accepted
+% to preserve compatibility with the original local folder naming.
+csv_dir = fullfile(project_root, 'data', 'high_adaptation_linear');
+if ~exist(csv_dir, 'dir')
+    csv_dir_alt = fullfile(project_root, 'data', 'high adaptation linear');
+    if exist(csv_dir_alt, 'dir')
+        csv_dir = csv_dir_alt;
+    end
+end
+
+out_dir = fullfile(project_root, 'results');
+
+if ~exist(out_dir, 'dir')
+    mkdir(out_dir);
+end
+
 mat_files = dir(fullfile(data_dir, '*_merged_data.mat'));
 if isempty(mat_files)
     error('No *_merged_data.mat files were found in "%s". Please check the path or file names.', data_dir);
@@ -36,7 +82,7 @@ roi_order  = roi_list;
 cond_order = {'unconnect','connect'};
 
 % Output directory for saving slopes
-slope_out_dir = fullfile(data_dir, 'fit_slopes_saved');
+slope_out_dir = fullfile(out_dir, 'fit_slopes_saved');
 if ~exist(slope_out_dir, 'dir'); mkdir(slope_out_dir); end
 
 % Initialize merged data structures
@@ -357,13 +403,15 @@ end
 % 
 % fprintf('\n[Linear scale] All analyses completed.\n');
 
-%% linear-space three-condition fit visualization (Uncon / Con / High numerosity) -- Figure 6B
-% - CSV loading matches Step 5: one CSV per ROI; use the first 7 rows, column 2 as y; x = 1..7
-% - Coordinate space matches Step 2: x = 1..7 (control PN bins)
-% - Plot style is aligned as closely as possible with the log-scale plotting style in Step 3
-% - Revised: fitted lines are always drawn across x = 1..7, extending to bin 7
-if ~exist('csv_dir','var')
-    csv_dir = 'D:\lrs\all-in-one analysis\high adaptation linear';
+%% Figure 5A: linear-space three-condition fit visualization
+if ~exist('csv_dir','var') || isempty(csv_dir)
+    csv_dir = fullfile(project_root, 'data', 'high_adaptation_linear');
+    if ~exist(csv_dir, 'dir')
+        csv_dir_alt = fullfile(project_root, 'data', 'high adaptation linear');
+        if exist(csv_dir_alt, 'dir')
+            csv_dir = csv_dir_alt;
+        end
+    end
 end
 
 % Color settings
@@ -529,7 +577,7 @@ end
 
 fprintf('===== Newly added: linear-space three-condition fit plots completed =====\n');
 
-%% Step 4: adaptation-effect analysis (log scale: x = logPN - log40) -- Figure 4A
+%% Figure 4A: adaptation-effect analysis (log scale: x = logPN - log40)
 adapter_numerosity = 40;
 pn_centers         = 1:7;
 x_positions_log    = log(pn_centers) - log(adapter_numerosity);
@@ -770,13 +818,7 @@ end
 % fprintf('\n[Saved] Log-space slopes:\n  MAT: %s\n  CSV: %s\n', out_log_mat, out_log_csv);
 % disp(Tlog);
 
-%% Bootstrap
-% Based on the existing workflow:
-% voxel merging -> control-based binning -> bin means -> linear fit
-% Perform paired voxel-wise bootstrap resampling with replacement to obtain
-% slope distributions and test the con-uncon difference.
-
-%% Table S2
+%% Table S2: Voxel-pooled bootstrap test of the condition-difference index (Diff)
 % Adjustable parameters
 boot_B        = 5000;
 min_bin_vox   = 2;
@@ -967,7 +1009,7 @@ end
 % 
 % fprintf('\n[Saved] Bootstrap results:\n  MAT: %s\n  CSV: %s\n', out_boot_mat, out_boot_csv);
 
-%% robustness check -- Table S5
+%% Table S5: robustness check
 % Goal: compare diff_mean and CI95 across different bootstrap sizes and seeds
 % This block depends on:
 % merged_pref / merged_ve / roi_list / x_positions_log / slope_out_dir
@@ -1174,20 +1216,7 @@ writetable(stab_table, out_stab_csv);
 fprintf('\n[Saved] Sensitivity-check results:\n  MAT: %s\n  CSV (runs): %s\n  CSV (stability): %s\n', ...
     out_sens_mat, out_sens_csv, out_stab_csv);
 
-%% Fig 3 (Panel A+B)
-% Goal: based on the log-scale adaptation-effect plot, overlay the bootstrap
-% mean fitted line and the 95% CI ribbon.
-%
-% Requirements in workspace:
-% - results.(roi).con_diff_log_mean / sem / uncon_diff_log_mean / sem
-% - results.(roi).bootstrap.slope_con / slope_uncon
-% - x_positions_log, x_limits, x_labels
-% - roi_list
-% - preferably intercept_log_6x2 and roi_order
-%
-% Also generates Fig 3b (Panel 2): point estimate + CI for diff,
-% grouped into posterior vs others, with y=0 and BH-FDR stars
-
+%% Figure 4C - step 1: one bootstrap-fit figure per ROI
 % Unified ROI order
 roi_order_plot = {'NF','NPC1','NPC2','NPC3','NPO','NTO'};
 group_others   = {'NF','NPC1','NPC2','NPC3'};
@@ -1215,7 +1244,6 @@ if ~exist('x_labels','var')
     x_labels = arrayfun(@(d) sprintf('%d', d), difference_centers, 'UniformOutput', false);
 end
 
-%% Part A: Figure 5A — one bootstrap-fit figure per ROI
 for ii = 1:numel(roi_order_plot)
     roi = roi_order_plot{ii};
 
@@ -1329,7 +1357,7 @@ for ii = 1:numel(roi_order_plot)
     ylim([-1.2, 1.2]);
     yticks(-1.2:0.4:1.2);
 
-    title(['Fig.5A  ' roi '  bootstrap fit (mean \pm 95% CI ribbon)']);
+    title(['Fig.4C  ' roi '  bootstrap fit (mean \pm 95% CI ribbon)']);
     ylabel('log(PN_{adapt}) - log(PN_{ctrl})');
 
     h_leg_uncon = plot(nan, nan, 'o', 'MarkerSize', 12, ...
@@ -1344,7 +1372,7 @@ for ii = 1:numel(roi_order_plot)
     hold off;
 end
 
-%% Figure 5B
+% Step 2
 % Colored light violin per ROI + black mean dot + black 95% CI line
 % + fixed ROI order: NF, NPC1-3, NPO, NTO
 % + significance stars at fixed y = 0.8
@@ -1547,7 +1575,7 @@ legend([h_leg_violin, h_leg_mean, h_leg_ci], 'Location','best');
 
 hold off;
 
-%% Figure 6B
+%% Figure 5B
 % ROI-level three-condition comparison (linear slopes: 40 unconnected + 40 connected + 20 unconnected from Tsouli et al., 2021)
 fprintf('\n===== ROI-level (NPC1-3 & NF) three-condition comparison (linear slopes) =====\n');
 
@@ -1557,8 +1585,14 @@ if ~exist('slope_lin_6x2','var')
 end
 
 % High numerosity CSV directory
-if ~exist('csv_dir','var')
-    csv_dir = 'D:\lrs\all-in-one analysis\high adaptation linear';
+if ~exist('csv_dir','var') || isempty(csv_dir)
+    csv_dir = fullfile(project_root, 'data', 'high_adaptation_linear');
+    if ~exist(csv_dir, 'dir')
+        csv_dir_alt = fullfile(project_root, 'data', 'high adaptation linear');
+        if exist(csv_dir_alt, 'dir')
+            csv_dir = csv_dir_alt;
+        end
+    end
 end
 
 roi_target_3c = {'NF','NPC1','NPC2','NPC3','NPO','NTO'};

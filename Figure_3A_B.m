@@ -15,7 +15,7 @@
 clear; clc;
 
 data_dir = 'params\';
-in_file  = fullfile(data_dir, 'sub02_merged_data.mat');
+in_file  = fullfile(data_dir, 'sub02_data.mat');
 load(in_file, 'pref', 've', 'width'); 
 
 roi_order = {'NTO','NPO','NPC1','NPC2','NPC3','NF'};
