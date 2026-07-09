@@ -1,11 +1,11 @@
-# Effective numerosity drives adaptation: map-specific recalibration of number-selective cortex revealed by perceptual grouping
-The data analysis code for the paper of "Effective numerosity drives adaptation: map-specific recalibration of number-selective cortex revealed by perceptual grouping"
+# Effective numerosity drives map-specific neural adaptation in human numerosity network 
+The data analysis code for the paper of "Effective numerosity drives map-specific neural adaptation in human numerosity network"
 
-# Analysis code for: *Effective numerosity drives adaptation: map-specific recalibration of number-selective cortex revealed by perceptual grouping*
+# Analysis code for: *Effective numerosity drives map-specific neural adaptation in human numerosity network*
 
 This repository contains the analysis and visualization code, together with anonymized processed data, for the manuscript:
 
-**Effective numerosity drives adaptation: map-specific recalibration of number-selective cortex revealed by perceptual grouping**
+**Effective numerosity drives map-specific neural adaptation in human numerosity network**
 
 ## Overview
 
@@ -26,7 +26,8 @@ code/
 │       ├── sub01_no adpatation.mat
 │       ├── sub01_PSE of 40 connected.mat
 │       ├── ...
-├── behavioral_experiment.m
+├── Figure_1A.m
+├── Figure_1B.m
 ├── Figure_2A_C.m
 ├── Figure_3A_B.m
 ├── Figure_3C.m
