@@ -32,7 +32,6 @@ code/
 ├── Figure_3A_B.m
 ├── Figure_3C.m
 ├── Figure_4B_TableS1.m
-├── Figure_S1.m
 ├── Table1_TableS4.m
 └── remaining_Figures_and_Tables.m
 ```
@@ -40,8 +39,11 @@ code/
 ## File Description
 
 ### Analysis scripts
-* `behavioral_experiment.m`
-  Main analysis script for the behavioral experiment.
+* `Figure_1A.m`
+  Analysis script for the main behavioral experiment.
+
+  * `Figure_1B.m`
+  Analysis script for the additional behavioral experiment.
 
 * `Figure_2A_C.m`
   Code for generating Figure 2A–C.
@@ -54,9 +56,6 @@ code/
 
 * `Figure_4B_TableS1.m`
   Code for generating Figure 4B and Table S1.
-
-* `Figure_S1.m`
-  Code for generating Supplementary Figure S1.
 
 * `Table1_TableS4.m`
   Code for generating Supplementary Tables 1 and S4.
@@ -142,12 +141,11 @@ If necessary, local file paths in the scripts should be adjusted to match the di
 
 Typical usage:
 
-* Run `behavioral_experiment.m` for the main behavioral analyses.
-* Run `additional_behavioral_experiment.m` for the follow-up behavioral analyses.
+* Run `Figure_1A.m` for Supplementary Figure 1A.
+* Run `Figure_1B.m` for Supplementary Figure 1B.
 * Run `Figure2A_C.m` for Figure 2.
 * Run `Figure_3A_B.m`, and `Figure_3C.m` for Figure 3.
 * Run `Figure_4B_TableS1.m` for Figure 4B and Table S1.
-* Run `Figure_S1.m` for Supplementary Figure S1.
 * Run `Table1_TableS4.m` for Supplementary Tables 1 and Table S4.
 * Run `remaining_Figures_Tables.m` for the remaining manuscript outputs.
 
@@ -155,14 +153,13 @@ Typical usage:
 
 | Manuscript output                         | Script                               |
 | ----------------------------------------- | ------------------------------------ |
-| Main behavioral analyses                  | `behavioral_experiment.m`            |
-| Additional behavioral experiment analyses | `additional_behavioral_experiment.m` |
+| Figure 1A                                 | `Figure_1A.m`                        |
+| Figure 1B                                 | `Figure_1B.m`                        |
 | Figure 2A–C                               | `Figure_2A_C.m`                      |
 | Figure 3A-B                               | `Figure_3A_B.m`                      |
 | Figure 3C                                 | `Figure_3C.m`                        |
 | Figure 4B                                 | `Figure_4B_TableS1.m`                |
 | Table S1                                  | `Figure_4B_TableS1.m`                |
-| Figure S1                                 | `Figure_S1.m`                        |
 | Tables 1                                  | `Table1_TableS4.m`                   |
 | Tables S4                                 | `Table1_TableS4.m`                   |
 | Other figures/tables                      | `remaining_Figures_and_Tables.m`     |
