@@ -1,11 +1,11 @@
-# Effective numerosity drives map-specific neural adaptation in human numerosity network 
-The data analysis code for the paper of "Effective numerosity drives map-specific neural adaptation in human numerosity network"
+# Effective numerosity drives map-specific neural adaptation in the human numerosity network 
+The data analysis code for the paper of "Effective numerosity drives map-specific neural adaptation in the human numerosity network"
 
-# Analysis code for: *Effective numerosity drives map-specific neural adaptation in human numerosity network*
+# Analysis code for: *Effective numerosity drives map-specific neural adaptation in the human numerosity network*
 
 This repository contains the analysis and visualization code, together with anonymized processed data, for the manuscript:
 
-**Effective numerosity drives map-specific neural adaptation in human numerosity network**
+**Effective numerosity drives map-specific neural adaptation in the human numerosity network**
 
 ## Overview
 
