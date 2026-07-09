@@ -88,28 +88,12 @@ Within the behavioral data folder, the file types have the following meanings:
 * `additional behavioral experiment data/`
   Folder containing organized data related to the additional behavioral experiment.
 
-## Notes on Behavioral Dataset Organization
-
-The behavioral dataset includes data from the main experiment and the follow-up additional behavioral experiment.
-
-### Main behavioral experiment
-
-The main behavioral analyses reported in the manuscript were primarily based on **participants 1–13**, because at that stage the additional behavioral experiment had not yet been conducted.
-
-### Additional behavioral experiment
-
-The additional behavioral experiment was conducted later and includes data from **participants 1–26**.
-
-For some participants, there is **no separate `*_addition.mat` file**. In those cases, this indicates that the participant completed the full experimental protocol (main experiment plus additional behavioral experiment), and the relevant follow-up data were retained within the corresponding `*_adaptation condition.mat` file rather than saved as a separate addition file.
-
-* `data/params/`
+* `data/fMRI data/`
   Anonymized processed neuroimaging-derived parameter files for individual participants.
 
 These files are **not raw MRI data**. They do not contain raw functional images, anatomical images, DICOM files, or NIfTI volumes. Instead, each file contains ROI-based model parameters extracted after neuroimaging preprocessing, model fitting, and ROI selection.
 
-Within the `data/params/` folder, the file types have the following meanings:
-
-* `*_merged_data.mat`
+* `*subxx_data.mat`
   Processed ROI-level parameter file for one anonymized participant.
 
   Each file contains extracted voxel-level parameters from the predefined numerosity maps/ROIs. The main variables include:
@@ -144,6 +128,20 @@ The condition labels generally indicate:
 
 * `uncon`
   The unconnected-dot adaptation condition.
+  
+## Notes on Behavioral Dataset Organization
+
+The behavioral dataset includes data from the main experiment and the follow-up additional behavioral experiment.
+
+### Main behavioral experiment
+
+The main behavioral analyses reported in the manuscript were primarily based on **participants 1–13**, because at that stage the additional behavioral experiment had not yet been conducted.
+
+### Additional behavioral experiment
+
+The additional behavioral experiment was conducted later and includes data from **participants 1–26**.
+
+For some participants, there is **no separate `*_addition.mat` file**. In those cases, this indicates that the participant completed the full experimental protocol (main experiment plus additional behavioral experiment), and the relevant follow-up data were retained within the corresponding `*_adaptation condition.mat` file rather than saved as a separate addition file.
 
 ## Data Availability
 
