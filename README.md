@@ -1,11 +1,11 @@
-# Effective numerosity drives map-specific neural adaptation in the human numerosity network 
-The data analysis code for the paper of "Effective numerosity drives map-specific neural adaptation in the human numerosity network"
+# Connectedness reveals a posterior-frontoparietal dissociation in numerosity adaptation
+The data analysis code for the paper of "Connectedness reveals a posterior-frontoparietal dissociation in numerosity adaptation"
 
-# Analysis code for: *Effective numerosity drives map-specific neural adaptation in the human numerosity network*
+# Analysis code for: *Connectedness reveals a posterior-frontoparietal dissociation in numerosity adaptation*
 
 This repository contains the analysis and visualization code, together with anonymized processed data, for the manuscript:
 
-**Effective numerosity drives map-specific neural adaptation in the human numerosity network**
+**Connectedness reveals a posterior-frontoparietal dissociation in numerosity adaptation**
 
 ## Overview
 
@@ -26,8 +26,8 @@ code/
 │       ├── sub01_no adpatation.mat
 │       ├── sub01_PSE of 40 connected.mat
 │       ├── ...
-├── Figure_1A.m
-├── Figure_1B.m
+├── Figure_1A_B.m
+├── Figure_1C.m
 ├── Figure_2A_C.m
 ├── Figure_3A_B.m
 ├── Figure_3C.m
@@ -39,10 +39,10 @@ code/
 ## File Description
 
 ### Analysis scripts
-* `Figure_1A.m`
+* `Figure_1A_B.m`
   Analysis script for the main behavioral experiment.
 
-  * `Figure_1B.m`
+  * `Figure_1C.m`
   Analysis script for the additional behavioral experiment.
 
 * `Figure_2A_C.m`
@@ -182,8 +182,8 @@ If necessary, local file paths in the scripts should be adjusted to match the di
 
 Typical usage:
 
-* Run `Figure_1A.m` for Supplementary Figure 1A.
-* Run `Figure_1B.m` for Supplementary Figure 1B.
+* Run `Figure_1A_B.m` for Supplementary Figure 1A and Figure 1B.
+* Run `Figure_1C.m` for Supplementary Figure 1C.
 * Run `Figure2A_C.m` for Figure 2.
 * Run `Figure_3A_B.m`, and `Figure_3C.m` for Figure 3.
 * Run `Figure_4B_TableS1.m` for Figure 4B and Table S1.
@@ -194,8 +194,9 @@ Typical usage:
 
 | Manuscript output                         | Script                               |
 | ----------------------------------------- | ------------------------------------ |
-| Figure 1A                                 | `Figure_1A.m`                        |
-| Figure 1B                                 | `Figure_1B.m`                        |
+| Figure 1A                                 | `Figure_1A_B.m`                      |
+| Figure 1B                                 | `Figure_1A_B.m`                      |
+| Figure 1C                                 | `Figure_1C.m`                        |
 | Figure 2A–C                               | `Figure_2A_C.m`                      |
 | Figure 3A-B                               | `Figure_3A_B.m`                      |
 | Figure 3C                                 | `Figure_3C.m`                        |
